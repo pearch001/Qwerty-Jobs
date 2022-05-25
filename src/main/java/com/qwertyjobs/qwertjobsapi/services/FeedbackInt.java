@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface FeedbackInt {
     Feedback  saveFeedback(Feedback feedback);
-    List<Feedback> loadFeedback();
+    List<Feedback> loadFeedback(long offset);
     void deleteFeedback(Long id);
 }

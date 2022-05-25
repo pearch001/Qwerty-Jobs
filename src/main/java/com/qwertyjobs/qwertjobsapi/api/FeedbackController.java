@@ -25,9 +25,9 @@ public class FeedbackController {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/users/feedback/add").toUriString());
         return ResponseEntity.created(uri).body(feedbackService.saveFeedback(feedback));
     }
-    @GetMapping(value = "/admin/getFeedback")
-    public List<Feedback> getFeedback(){
-        return feedbackService.loadFeedback();
+    @GetMapping(value = "/admin/getFeedback/{Offset}")
+    public List<Feedback> getFeedback(@PathVariable("Offset") Long id){
+        return feedbackService.loadFeedback(id);
     }
     @DeleteMapping(value = "/admin/deleteFeedback/{Id}")
     public ResponseEntity<?> deleteFeedback(@PathVariable("Id") Long id){

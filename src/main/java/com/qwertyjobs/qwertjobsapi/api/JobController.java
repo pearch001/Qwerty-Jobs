@@ -26,7 +26,11 @@ public class JobController {
         return ResponseEntity.created(uri).body(jobService.saveJob(job));
     }
 
-    @GetMapping(value = "/getJobs")
+    @GetMapping(value = "/getJobs/{offset}")
+    public List<Job> getJobs(@PathVariable Long offset){
+        return jobService.loadJob(offset);
+    }
+    @GetMapping(value = "/getJobs/{jobTitle}")
     public List<Job> getFeedback(){
         return jobService.loadJob();
     }

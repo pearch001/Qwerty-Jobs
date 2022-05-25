@@ -7,16 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Qwert-Jobs-api" />
+        <module name="To-Do-List-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Qwert-Jobs-api" target="11" />
+      <module name="To-Do-List-api" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Qwert-Jobs-api" options="-parameters" />
+      <module name="To-Do-List-api" options="-parameters" />
     </option>
   </component>
 </project>

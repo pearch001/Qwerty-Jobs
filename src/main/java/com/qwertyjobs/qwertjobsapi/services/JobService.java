@@ -26,8 +26,8 @@ public class JobService implements JobInt{
     }
 
     @Override
-    public List<Job> loadJob() {
-        return (List<Job>) jobDao.findAll();
+    public List<Job> loadJob(long offset) {
+        return (List<Job>) jobDao.selectByOffset(offset);
     }
 
     @Override

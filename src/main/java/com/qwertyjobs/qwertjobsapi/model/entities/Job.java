@@ -25,7 +25,8 @@ public class Job {
     private Long id;
     private String description;
     private String title;
-    private String salary;
+    private long salaryUpperBound;
+    private long salaryLowerBound;
     private String state;
     @CreationTimestamp
     private Date dateCreated;

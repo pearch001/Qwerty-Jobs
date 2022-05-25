@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -15,5 +16,7 @@ public interface FeedbackDao extends CrudRepository<Feedback, Long> {
     @Query("SELECT f FROM "
             + "feedback f WHERE f.id = ?1")
     Feedback selectByID(Long id);
+    @Query(value = "SELECT * FROM feedback LIMIT 10 OFFSET ?1", nativeQuery = true)
+    List<Feedback> selectByOffset(Long id);
 
 }
