@@ -8,6 +8,6 @@ import java.util.List;
 public interface JobInt {
     Job saveJob(Job job);
     List<Job> loadJob(Long offset);
-    List<Job> searchJobs(String jobtitle, String city, Long salaryUpperBound, Long salaryLowerBound);
+    List<Job> searchJobs(String jobtitle, String city, Long salaryBound, int offset);
     void deleteJob(Long id);
 }

@@ -18,4 +18,9 @@ public interface JobDao extends CrudRepository<Job,Long> {
     Job selectByID(Long id);
     @Query(value = "SELECT * FROM job LIMIT 10 OFFSET ?1", nativeQuery = true)
     List<Job> selectByOffset(Long id);
+    @Query(value = "SELECT * FROM job " +
+            "WHERE title LIKE '%?1%' AND" +
+            "WHERE city LIKE '%?2%' AND" +
+            "WHERE salaryUpperBound >= ?3 LIMIT 10 OFFSET ?4", nativeQuery = true)
+    List<Job> searchJobs(String jobtitle, String city, Long salaryBound, int offset);
 }

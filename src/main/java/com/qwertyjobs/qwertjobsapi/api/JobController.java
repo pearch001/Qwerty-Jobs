@@ -16,6 +16,8 @@ import java.util.List;
 @RequestMapping("/api/v1/job")
 @RestController
 public class JobController {
+    private int offset = 1;
+
     @Autowired
     private JobService jobService;
 
@@ -30,9 +32,16 @@ public class JobController {
     public List<Job> getJobs(@PathVariable Long offset){
         return jobService.loadJob(offset);
     }
+
     @GetMapping(value = "/getJobs/{jobTitle}")
-    public List<Job> getFeedback(){
-        return jobService.loadJob();
+    public List<Job> getFeedback(@PathVariable("jobTitle") String jobTitle,
+                                 @RequestParam(required = false) String city,
+                                 @RequestParam(required = false) Long salaryBound,
+                                 @RequestParam(required = false) int offset){
+        if (offset == 0){
+            offset = this.offset;
+        }
+        return jobService.searchJobs(jobTitle,city,salaryBound,offset);
     }
     @DeleteMapping(value = "/admin/deleteJob/{Id}")
     public ResponseEntity<?> deleteJob(@PathVariable("Id") Long id){
