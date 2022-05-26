@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("/api/v1/job")
 @RestController
 public class JobController {
-    private int offset = 1;
 
     @Autowired
     private JobService jobService;
@@ -28,22 +27,37 @@ public class JobController {
         return ResponseEntity.created(uri).body(jobService.saveJob(job));
     }
 
-    @GetMapping(value = "/getJobs/{offset}")
+    @GetMapping(value = "/jobs/{offset}")
     public List<Job> getJobs(@PathVariable Long offset){
         return jobService.loadJob(offset);
     }
 
-    @GetMapping(value = "/getJobs/{jobTitle}")
-    public List<Job> getFeedback(@PathVariable("jobTitle") String jobTitle,
+    @GetMapping(value = "/jobs/count")
+    public int countJobs(){ return jobService.loadAllJob().size();}
+
+    @GetMapping(value = "/jobs/count/{jobTitle}")
+    public int countSearchedJobs(@PathVariable("jobTitle") String jobTitle,
                                  @RequestParam(required = false) String city,
                                  @RequestParam(required = false) Long salaryBound,
                                  @RequestParam(required = false) int offset){
         if (offset == 0){
-            offset = this.offset;
+            offset = 1;
+        }
+        return jobService.allSearchedJobs(jobTitle,city,salaryBound);
+    }
+
+    @GetMapping(value = "/jobs/{jobTitle}")
+    public List<Job> getJobs(@PathVariable("jobTitle") String jobTitle,
+                                 @RequestParam(required = false) String city,
+                                 @RequestParam(required = false) Long salaryBound,
+                                 @RequestParam(required = false) int offset){
+        if (offset == 0){
+            offset = 1;
         }
         return jobService.searchJobs(jobTitle,city,salaryBound,offset);
     }
-    @DeleteMapping(value = "/admin/deleteJob/{Id}")
+
+    @DeleteMapping(value = "/admin/job/{Id}")
     public ResponseEntity<?> deleteJob(@PathVariable("Id") Long id){
         jobService.deleteJob(id);
         return ResponseEntity.ok().build();

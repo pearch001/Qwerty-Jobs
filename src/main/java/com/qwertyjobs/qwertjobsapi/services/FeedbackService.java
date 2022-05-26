@@ -24,8 +24,14 @@ public class FeedbackService implements FeedbackInt{
     }
 
     @Override
-    public List<Feedback> loadFeedback(long id) {
+    public List<Feedback> loadFeedbacks(Long id) {
         return (List<Feedback>) feedbackDao.selectByOffset(id);
+    }
+
+    @Override
+    public int countFeedbacks() {
+        List<Feedback> feedbacks = (List<Feedback>) feedbackDao.findAll();
+        return feedbacks.size();
     }
 
     @Override

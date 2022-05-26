@@ -31,10 +31,37 @@ public class JobService implements JobInt{
     }
 
     @Override
-    public List<Job> searchJobs(String jobtitle, String city, Long salaryBound, int offset) {
-        return null;
+    public List<Job> searchJobs(String jobTitle, String city, Long salaryBound, int offset) {
+        if (jobTitle == null){
+            jobTitle = "";
+        }
+        if (city == null){
+            city = "";
+        }
+        if (salaryBound == null){
+            salaryBound = Long.MIN_VALUE;
+        }
+            return (List<Job>) jobDao.searchJobs(jobTitle, city, salaryBound, offset);
     }
 
+    @Override
+    public int allSearchedJobs(String jobTitle, String city, Long salaryBound) {
+        if (jobTitle == null){
+            jobTitle = "";
+        }
+        if (city == null){
+            city = "";
+        }
+        if (salaryBound == null){
+            salaryBound = Long.MIN_VALUE;
+        }
+        return jobDao.allSearchedJobs(jobTitle, city, salaryBound);
+    }
+
+    @Override
+    public List<Job> loadAllJob() {
+        return (List<Job>) jobDao.findAll();
+    }
 
 
     @Override
