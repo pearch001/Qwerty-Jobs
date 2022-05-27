@@ -30,7 +30,7 @@ public class FeedbackController {
         return feedbackService.loadFeedbacks(id);
     }
 
-    @GetMapping(value = "/admin/feedbacks/{Offset}")
+    @GetMapping(value = "/admin/feedbacks/count/{Offset}")
     public int countFeedback(){
         return feedbackService.countFeedbacks();
     }
