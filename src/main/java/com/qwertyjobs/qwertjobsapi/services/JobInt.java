@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface JobInt {
     Job saveJob(Job job);
-    List<Job> loadJob(Long offset);
+    List<Job> loadJob(int offset);
     List<Job> searchJobs(String jobTitle, String city, Long salaryBound, int offset);
     int allSearchedJobs(String jobTitle, String city, Long salaryBound);
     List<Job> loadAllJob();

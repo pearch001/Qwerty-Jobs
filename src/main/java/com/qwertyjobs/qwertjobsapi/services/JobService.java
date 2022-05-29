@@ -26,7 +26,7 @@ public class JobService implements JobInt{
     }
 
     @Override
-    public List<Job> loadJob(Long offset) {
+    public List<Job> loadJob(int offset) {
         return (List<Job>) jobDao.selectByOffset(offset);
     }
 
@@ -34,9 +34,13 @@ public class JobService implements JobInt{
     public List<Job> searchJobs(String jobTitle, String city, Long salaryBound, int offset) {
         if (jobTitle == null){
             jobTitle = "";
+        }else {
+            jobTitle = jobTitle.trim();
         }
         if (city == null){
             city = "";
+        }else {
+            city = city.trim();
         }
         if (salaryBound == null){
             salaryBound = Long.MIN_VALUE;
@@ -48,9 +52,13 @@ public class JobService implements JobInt{
     public int allSearchedJobs(String jobTitle, String city, Long salaryBound) {
         if (jobTitle == null){
             jobTitle = "";
+        }else {
+            jobTitle = jobTitle.trim();
         }
         if (city == null){
             city = "";
+        }else {
+            city = city.trim();
         }
         if (salaryBound == null){
             salaryBound = Long.MIN_VALUE;

@@ -16,7 +16,7 @@ public interface FeedbackDao extends CrudRepository<Feedback, Long> {
     @Query("SELECT f FROM "
             + "feedback f WHERE f.id = ?1")
     Feedback selectByID(Long id);
-    @Query(value = "SELECT * FROM feedback LIMIT 10 OFFSET ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM feedback ORDER BY id OFFSET ?1 ROWS FETCH NEXT 10 ROWS ONLY", nativeQuery = true)
     List<Feedback> selectByOffset(Long id);
 
 }

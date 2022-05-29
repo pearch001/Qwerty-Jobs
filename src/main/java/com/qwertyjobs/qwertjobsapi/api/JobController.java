@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @Slf4j
-@RequestMapping("/api/v1/job")
+@RequestMapping("/api/v1/jobs")
 @RestController
 public class JobController {
 
@@ -27,37 +27,34 @@ public class JobController {
         return ResponseEntity.created(uri).body(jobService.saveJob(job));
     }
 
-    @GetMapping(value = "/jobs/{offset}")
-    public List<Job> getJobs(@PathVariable Long offset){
+    @GetMapping(value = "/{offset}")
+    public List<Job> getJobs(@PathVariable int offset){
         return jobService.loadJob(offset);
     }
 
-    @GetMapping(value = "/jobs/count")
+    @GetMapping(value = "/count")
     public int countJobs(){ return jobService.loadAllJob().size();}
 
-    @GetMapping(value = "/jobs/count/{jobTitle}")
+    @GetMapping(value = "/count/{jobTitle}")
     public int countSearchedJobs(@PathVariable("jobTitle") String jobTitle,
                                  @RequestParam(required = false) String city,
-                                 @RequestParam(required = false) Long salaryBound,
-                                 @RequestParam(required = false) int offset){
-        if (offset == 0){
-            offset = 1;
-        }
+                                 @RequestParam(required = false) Long salaryBound){
+
         return jobService.allSearchedJobs(jobTitle,city,salaryBound);
     }
 
-    @GetMapping(value = "/jobs/{jobTitle}")
+    @GetMapping(value = "/search/{jobTitle}")
     public List<Job> getJobs(@PathVariable("jobTitle") String jobTitle,
                                  @RequestParam(required = false) String city,
                                  @RequestParam(required = false) Long salaryBound,
-                                 @RequestParam(required = false) int offset){
-        if (offset == 0){
-            offset = 1;
+                                 @RequestParam(required = false) Integer offset){
+        if (offset == null){
+            offset = 0;
         }
         return jobService.searchJobs(jobTitle,city,salaryBound,offset);
     }
 
-    @DeleteMapping(value = "/admin/job/{Id}")
+    @DeleteMapping(value = "/admin/{Id}")
     public ResponseEntity<?> deleteJob(@PathVariable("Id") Long id){
         jobService.deleteJob(id);
         return ResponseEntity.ok().build();
